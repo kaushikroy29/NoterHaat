@@ -1,0 +1,18 @@
+[dotenv@17.3.1] injecting env (3) from .env -- tip: ⚙️  write to custom object with { processEnv: myObject }
+E:\NoterHat\server\node_modules\mongoose\lib\schema\number.js:363
+  for (const value of values) {
+                      ^
+
+TypeError: values is not iterable
+    at SchemaNumber.enum (E:\NoterHat\server\node_modules\mongoose\lib\schema\number.js:363:23)
+    at SchemaNumber.SchemaType (E:\NoterHat\server\node_modules\mongoose\lib\schemaType.js:125:18)
+    at new SchemaNumber (E:\NoterHat\server\node_modules\mongoose\lib\schema\number.js:30:14)
+    at Schema.interpretAsType (E:\NoterHat\server\node_modules\mongoose\lib\schema.js:1794:22)
+    at Schema.path (E:\NoterHat\server\node_modules\mongoose\lib\schema.js:1341:27)
+    at Schema.add (E:\NoterHat\server\node_modules\mongoose\lib\schema.js:899:14)
+    at new Schema (E:\NoterHat\server\node_modules\mongoose\lib\schema.js:147:10)
+    at Object.<anonymous> (E:\NoterHat\server\models\WantedPost.js:3:26)
+    at Module._compile (node:internal/modules/cjs/loader:1521:14)
+    at Module._extensions..js (node:internal/modules/cjs/loader:1623:10)
+
+Node.js v20.20.0

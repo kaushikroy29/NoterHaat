@@ -1,7 +1,13 @@
+require('dotenv').config();
 const express = require('express');
 const cors = require('cors');
 const http = require('http');
 const { Server } = require('socket.io');
+const connectDB = require('./config/db');
+
+// Connect to MongoDB
+connectDB();
+
 
 // Initialize app
 const app = express();
@@ -19,16 +25,29 @@ const io = new Server(server, {
 app.use(cors());
 app.use(express.json());
 
+// Routes
+const authRoutes = require('./routes/auth');
+const listingRoutes = require('./routes/listings');
+const adminRoutes = require('./routes/admin');
+const wantedRoutes = require('./routes/wanted');
+const usersRoutes = require('./routes/users');
+const messagesRoutes = require('./routes/messages');
+const offersRoutes = require('./routes/offers');
+
 // Basic Route
 app.get('/', (req, res) => {
   res.send('NoterHaat API is running...');
 });
 
-// Mocking some API routes for frontend mock integration
-app.get('/api/listings', (req, res) => {
-  // Normally would fetch from MongoDB
-  res.json({ message: 'Listings endpoint working' });
-});
+// API Routes
+app.use('/api/auth', authRoutes);
+app.use('/api/listings', listingRoutes);
+app.use('/api/admin', adminRoutes);
+app.use('/api/wanted', wantedRoutes);
+app.use('/api/users', usersRoutes);
+app.use('/api/messages', messagesRoutes);
+app.use('/api/offers', offersRoutes);
+app.use('/api/gifts', require('./routes/gifts'));
 
 // Socket logic
 io.on('connection', (socket) => {
