@@ -151,10 +151,33 @@ const mockWantedPosts = [
   },
 ];
 
+const mockPendingListings = [
+  {
+    _id: 'p1',
+    sellerId: { _id: 'u6', name: 'কবির হুসাইন', avatar: null, isVerified: false },
+    denomination: 100,
+    serialNumber: 'ঝঞ 1122334',
+    askingPrice: 5000,
+    status: 'pending',
+    createdAt: new Date().toISOString(),
+  }
+];
+
+const mockUnverifiedUsers = [
+  {
+    _id: 'u6',
+    name: 'কবির হুসাইন',
+    email: 'kabir@example.com',
+    joinDate: '2026-03-10',
+    verificationStatus: 'pending',
+    idDocument: 'nid_front.jpg'
+  }
+];
+
 export const useStore = create((set, get) => ({
   // Auth state
-  user: null,
-  isAuthenticated: false,
+  user: { _id: 'admin1', name: 'অ্যাডমিন', role: 'admin' }, // Logged in as admin for demo
+  isAuthenticated: true,
   
   // Listings
   listings: mockListings,
@@ -190,6 +213,26 @@ export const useStore = create((set, get) => ({
     wantedPosts: [post, ...state.wantedPosts]
   })),
   
+  // Admin state
+  pendingListings: mockPendingListings,
+  unverifiedUsers: mockUnverifiedUsers,
+
+  // Admin Actions
+  approveListing: (id) => set((state) => {
+    const listing = state.pendingListings.find(l => l._id === id);
+    if (!listing) return state;
+    return {
+      pendingListings: state.pendingListings.filter(l => l._id !== id),
+      listings: [{ ...listing, status: 'active' }, ...state.listings]
+    };
+  }),
+  rejectListing: (id) => set((state) => ({
+    pendingListings: state.pendingListings.filter(l => l._id !== id)
+  })),
+  verifyUser: (id) => set((state) => ({
+    unverifiedUsers: state.unverifiedUsers.filter(u => u._id !== id)
+  })),
+
   // Chat actions
   setActiveConversation: (conv) => set({ activeConversation: conv }),
   addMessage: (msg) => set((state) => ({

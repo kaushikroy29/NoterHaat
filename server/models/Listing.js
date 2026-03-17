@@ -62,11 +62,12 @@ const listingSchema = new mongoose.Schema(
     },
     status: {
       type: String,
-      enum: ['active', 'sold', 'reserved'],
-      default: 'active',
+      enum: ['pending', 'active', 'sold', 'reserved', 'rejected'],
+      default: 'pending',
     },
   },
   {
+
     timestamps: true,
   }
 );

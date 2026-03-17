@@ -14,6 +14,8 @@ import PostListingPage from './pages/PostListingPage';
 import WantedBoardPage from './pages/WantedBoardPage';
 import ChatPage from './pages/ChatPage';
 import ProfilePage from './pages/ProfilePage';
+import AdminDashboard from './pages/AdminDashboard';
+import AdminApprovals from './pages/AdminApprovals';
 
 function App() {
   return (
@@ -30,8 +32,11 @@ function App() {
           <Route path="/wanted" element={<WantedBoardPage />} />
           <Route path="/chat" element={<ChatPage />} />
           <Route path="/profile/:id" element={<ProfilePage />} />
+          <Route path="/admin" element={<AdminDashboard />} />
+          <Route path="/admin/approvals" element={<AdminApprovals />} />
         </Routes>
       </main>
+
 
       <Footer />
       <MobileNav />

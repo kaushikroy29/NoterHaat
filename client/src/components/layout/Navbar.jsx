@@ -57,10 +57,16 @@ export default function Navbar() {
               <Bell className="w-5 h-5 text-text-muted" />
               <span className="absolute top-1 right-1 w-2 h-2 bg-danger rounded-full"></span>
             </Link>
+            {useStore.getState().user?.role === 'admin' && (
+              <Link to="/admin" className="btn btn-gold-outline btn-sm">
+                Admin Panel
+              </Link>
+            )}
             {isAuthenticated ? (
               <Link to="/profile/me" className="w-9 h-9 rounded-full bg-primary text-white flex items-center justify-center font-bold text-sm">
                 র
               </Link>
+
             ) : (
               <Link to="/browse" className="btn btn-green btn-sm">
                 Login
